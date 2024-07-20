@@ -156,6 +156,11 @@ input:focus {
   transform: translateY(-2px);
 }
 
+.link {
+  color: #e7ffe2;
+  margin: 10px;
+}
+
 /* Message Styles */
 #message {
   margin-top: 1rem;
