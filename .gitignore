@@ -10,7 +10,7 @@ exchange_rates/
 
 
 #statics
-static/
+
 
 #poetry
 *.toml
