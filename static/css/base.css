@@ -1,0 +1,250 @@
+:root {
+  --blue: #667fd3;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #e74a3b;
+  --orange: #fd7e14;
+  --yellow: #f6c23e;
+  --green: #1cc88a;
+  --teal: #20c9a6;
+  --cyan: #36b9cc;
+  --white: #fff;
+  --gray: #858796;
+  --gray-dark: #5a5c69;
+  --primary: #117953;
+  --secondary: #858796;
+  --success: #1cc88a;
+  --info: #36b9cc;
+  --warning: #f6c23e;
+  --danger: #e74a3b;
+  --light: #f8f9fc;
+  --dark: #212529;
+  --background-color-main: #f7f9ff;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --font-family-sans-serif: "Nunito", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+body {
+  margin: 0;
+  font-family: "Lucida Console", "Courier New" !important;
+  color: var(--background-color-main) !important;
+  background: conic-gradient(
+    from 90deg,
+    var(--primary),
+    var(--teal),
+    var(--dark)
+  );
+}
+
+.vh-100 {
+  height: 100vh;
+}
+
+#sidebar {
+  width: 280px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+#sidebar .nav-link.active {
+  background-color: var(--primary); /* Active link background color */
+  color: #fff; /* Active link text color */
+}
+
+.mt-auto {
+  margin-top: auto;
+}
+
+.main-content {
+  margin-left: 280px; /* Matches the sidebar width */
+  height: 100vh;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+/* Define the blur effect for the table rows */
+.table-body tr {
+  backdrop-filter: blur(6px);
+  background-color: rgba(
+    145,
+    207,
+    174,
+    0.233
+  ); /* Semi-transparent background to see the blur */
+}
+
+/* Add some padding to make it look better */
+.table-body td {
+  padding: 10px;
+}
+
+.table {
+  --bs-table-striped-color: var(--background-color-main) !important;
+}
+
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+  border-style: hidden !important;
+}
+
+.table > tbody {
+  vertical-align: middle !important;
+}
+.table-head {
+  background-color: var(--dark) !important;
+  color: white;
+}
+.table-body {
+  color: var(--background-color-main) !important;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper-filter {
+  position: relative;
+  display: inline-block;
+}
+
+.wrapper-filter:before {
+  content: "\f0b0"; /* Unicode value for the filter icon in Font Awesome */
+  font-family: "Font Awesome 5 Free"; /* Font Awesome 5 */
+  font-weight: 900; /* Font weight for solid icons */
+  font-size: 1em; /* Adjust the size as needed */
+  color: #fff; /* Icon color */
+  position: absolute;
+  right: 20px; /* Adjust the position as needed */
+  top: 75%;
+  transform: translateY(-50%);
+}
+
+#chart {
+  background-color: #ffffffb3; /*  #212529ed (dark) #ffffffb3 (light white) 92d9a4a6 (light green)*/
+  margin-top: 40px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+#pieChart {
+  background-color: #ffffffb3; /* light grey background */
+  padding: 10px; /* optional: to add some padding around the chart */
+}
+#lineChart {
+  background-color: #ffffffb3; /* light grey background */
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 10px; /* optional: to add some padding around the chart */
+}
+
+.offcanvas-header,
+.offcanvas-body {
+  background-color: var(--dark);
+}
+
+.offcanvas.show {
+  transform: none;
+  width: 40% !important;
+  z-index: 1000010 !important;
+}
+
+@media (max-width: 1500px) {
+  #sidebar {
+    width: 250px; /* Adjust sidebar width for medium screens */
+  }
+  .main-content {
+    margin-left: 250px; /* Adjust margin for medium screens */
+  }
+  .menubtn {
+    visibility: hidden;
+    display: none;
+  }
+  .offscreen {
+    display: none;
+  }
+}
+
+@media (max-width: 1200px) {
+  #sidebar {
+    width: 220px; /* Adjust sidebar width for medium screens */
+  }
+  .main-content {
+    margin-left: 220px; /* Adjust margin for medium screens */
+  }
+  .menubtn {
+    visibility: hidden;
+    display: none;
+  }
+  .offscreen {
+    display: none;
+  }
+}
+
+@media (max-width: 992px) {
+  #sidebar {
+    width: 200px; /* Adjust sidebar width for tablets */
+  }
+  .main-content {
+    margin-left: 200px; /* Adjust margin for tablets */
+  }
+  .menubtn {
+    visibility: hidden;
+    display: none;
+  }
+  .offscreen {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    width: 180px; /* Adjust sidebar width for smaller tablets and large phones */
+  }
+  .main-content {
+    margin-left: 180px; /* Adjust margin for smaller tablets and large phones */
+  }
+  .menubtn {
+    visibility: hidden;
+    display: none;
+  }
+  .offscreen {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  #sidebar {
+    visibility: hidden;
+    /* width: 50%; /* Full width for small screens */
+    /* height: auto; */
+    /* position: relative; */
+  }
+  .main-content {
+    margin-left: 0;
+  }
+  .menubtn {
+    visibility: visible;
+    display: flex;
+  }
+  .offscreen {
+    display: none;
+  }
+}

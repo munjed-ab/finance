@@ -1,0 +1,42 @@
+/* cards */
+.card {
+  position: relative;
+  display: block !important;
+  border: 4px solid var(--primary) !important;
+  padding: 10px;
+  margin: 10px;
+}
+
+.card-border-left-primary {
+  border-left: 0.5rem solid #4e73df !important;
+}
+.card-border-bottom-success {
+  border-bottom: 0.5rem solid #1cc88a !important;
+}
+.card-border-left-secondary {
+  border-left: 0.5rem solid #858796 !important;
+}
+
+.card-border-left-success {
+  border-left: 0.5rem solid #1cc88a !important;
+}
+
+.card-border-left-info {
+  border-left: 0.5rem solid #36b9cc !important;
+}
+
+.card-border-left-warning {
+  border-left: 0.5rem solid #f6c23e !important;
+}
+
+.card-border-left-danger {
+  border-left: 0.5rem solid #e74a3b !important;
+}
+
+.card-border-left-light {
+  border-left: 0.5rem solid brown !important;
+}
+
+.card-border-left-dark {
+  border-left: 0.5rem solid #5a5c69 !important;
+}

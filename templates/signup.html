@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/static/css/auth.css" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      input {
+        width: 100%;
+        padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+        border: 1px solid var(--gray);
+        border-radius: 4px;
+        font-size: 1rem;
+        color: var(--text-color-primary);
+        background-color: var(--background-color-main);
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+      .form-group .icon-user {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-190%);
+        color: var(--gray);
+      }
+
+      .form-group .icon-email {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(90%);
+        color: var(--gray);
+      }
+
+      .form-group .icon-password1 {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-60%);
+        color: var(--gray);
+      }
+      .form-group .icon-password2 {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(90%);
+        color: var(--gray);
+      }
+      .info {
+        color: var(--gray);
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-wrapper">
+      <div class="container">
+        <h1>Sign Up</h1>
+        <form id="signupForm" class="form">
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <i class="icon-user fas fa-user"></i>
+            <input type="text" id="username" name="username" required />
+            <p class="info">Username must not contain whitespace</p>
+            <p class="info">Username must be at least 3 to 150 characters</p>
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <i class="icon-email fas fa-envelope"></i>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <i class="icon-password1 fas fa-lock"></i>
+            <input type="password" id="password" name="password" required />
+            <p class="info">Password must be at least 8 characters long</p>
+          </div>
+          <div class="form-group">
+            <label for="password2">Confirm Password:</label>
+            <i class="icon-password2 fas fa-lock"></i>
+            <input type="password" id="password2" name="password2" required />
+          </div>
+          <button type="submit" class="btn">Sign Up</button>
+        </form>
+        <p id="message"></p>
+      </div>
+    </div>
+    <script src="/static/js/auth.js"></script>
+  </body>
+</html>

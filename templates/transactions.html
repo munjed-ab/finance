@@ -1,0 +1,212 @@
+{% extends "base.html" %} {% block title %}Transactions{% endblock %} {% block
+content %}
+<div class="container">
+  <h1 class="text-center">Transactions</h1>
+  <div class="card mx-auto" style="">
+    <div class="card-body">
+      <form id="transactionForm">
+        <div class="mb-3">
+          <label for="amount" class="form-label">Amount</label>
+          <input
+            type="number"
+            class="form-control"
+            step=".01"
+            id="amount"
+            name="amount"
+            placeholder="49.9"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="type" class="form-label">Type</label>
+          <select id="type" name="type" class="form-select" required>
+            <option value="Income">Income</option>
+            <option value="Expense">Expense</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="category_name" class="form-label">Category</label>
+          <input
+            type="text"
+            class="form-control"
+            id="category_name"
+            name="category_name"
+            placeholder="Shopping"
+            required
+          />
+          <div class="mb-3">
+            <label for="currency" class="form-label">Currency</label>
+            <select name="currency" id="currency" class="form-control">
+              <option value="USD">USD</option>
+              <option value="ALL">ALL</option>
+              <option value="AUD">AUD</option>
+              <option value="AOA">AOA</option>
+              <option value="BSD">BSD</option>
+              <option value="CHF">CHF</option>
+              <option value="CAD">CAD</option>
+              <option value="DZD">DZD</option>
+              <option value="EGP">EGP</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+              <option value="IRR">IRR</option>
+              <option value="JPY">JPY</option>
+              <option value="NGN">NGN</option>
+              <option value="QAR">QAR</option>
+              <option value="SYP">SYP</option>
+              <option value="USD">USD</option>
+              <option value="ZAR">ZAR</option>
+            </select>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            class="form-control"
+            placeholder="Lunch ingredients.."
+          ></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="date" class="form-label">Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="date"
+            name="date"
+            required
+          />
+        </div>
+        <div class="d-grid">
+          <button type="submit" class="">Add Transaction</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table id="transactionsTable" class="table table-striped mt-4">
+      <thead class="table-head">
+        <tr>
+          <th>Amount</th>
+          <th>Type</th>
+          <th>Category</th>
+          <th>Currency</th>
+          <th>Description</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody class="table-body">
+        <!-- Transactions will be populated here -->
+      </tbody>
+    </table>
+    <br />
+    <br />
+  </div>
+</div>
+
+<!-- Modal for updating transaction -->
+<div
+  class="modal fade"
+  id="editTransactionModal"
+  tabindex="-1"
+  aria-labelledby="editTransactionModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editTransactionModalLabel">
+          Edit Transaction
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form id="editTransactionForm">
+          <input type="hidden" id="edit-transaction-id" />
+          <div class="mb-3">
+            <label for="edit-amount" class="form-label">Amount</label>
+            <input
+              type="number"
+              step=".01"
+              class="form-control"
+              id="edit-amount"
+              name="amount"
+              placeholder="49.9"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="edit-type" class="form-label">Type</label>
+            <select class="form-control" id="edit-type" name="type" required>
+              <option value="Income">Income</option>
+              <option value="Expense">Expense</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="edit-category" class="form-label">Category</label>
+            <input
+              type="text"
+              class="form-control"
+              id="edit-category"
+              name="category_name"
+              placeholder="Shopping"
+              required
+            />
+          </div>
+          <div class="col-md-3 wrapper-filter">
+            <label for="edit-currency">Currency</label>
+            <select name="currency" id="edit-currency" class="form-control">
+              <option value="USD">USD</option>
+              <option value="ALL">ALL</option>
+              <option value="AUD">AUD</option>
+              <option value="AOA">AOA</option>
+              <option value="BSD">BSD</option>
+              <option value="CHF">CHF</option>
+              <option value="CAD">CAD</option>
+              <option value="DZD">DZD</option>
+              <option value="EGP">EGP</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+              <option value="IRR">IRR</option>
+              <option value="JPY">JPY</option>
+              <option value="NGN">NGN</option>
+              <option value="QAR">QAR</option>
+              <option value="SYP">SYP</option>
+              <option value="USD">USD</option>
+              <option value="ZAR">ZAR</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="edit-description" class="form-label">Description</label>
+            <textarea
+              class="form-control"
+              id="edit-description"
+              name="description"
+              placeholder="Lunch ingredients.."
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="edit-date" class="form-label">Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="edit-date"
+              name="date"
+              required
+            />
+          </div>
+          <button type="submit" class="">Update Transaction</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/static/js/transactions.js"></script>
+{% endblock %}

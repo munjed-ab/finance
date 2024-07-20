@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App Home Page</title>
+    <link rel="stylesheet" href="/static/css/index.css" />
+  </head>
+  <body>
+    <!--ALL-->
+    <!--ART-->
+    <!--IMAGES-->
+    <!--IN-->
+    <!--THIS-->
+    <!--PAGE-->
+    <!--CREDIT-->
+    <!--TO-->
+    <!--FREEPIK[https://www.freepik.com/]-->
+    <!--TEAM-->
+    <!--THANK-->
+    <!--YOU-->
+    <!--ALL-->
+    <header>
+      <nav>
+        <div class="logo">MyApp</div>
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <ul id="nav-links">
+          <li><a class="scroll" href="#features">Features</a></li>
+          <li><a class="scroll" href="#about">About</a></li>
+          <li><a class="scroll" href="#contact">Contact</a></li>
+          <li><a href="/login">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Welcome to MyApp</h1>
+        <p>
+          Your perfect solution for managing expenses and incomes effortlessly.
+        </p>
+        <a href="/signup" class="btn btn-primary">Get Started</a>
+      </div>
+    </section>
+
+    <section id="features" class="features">
+      <div class="container">
+        <h2>Features</h2>
+        <div class="feature-list">
+          <div class="feature-item">
+            <img src="/static/img/track_expense.png" alt="Track Expenses" />
+            <h3>Track Expenses</h3>
+            <p>Keep a detailed record of your expenses with ease.</p>
+          </div>
+          <div class="feature-item">
+            <img src="/static/img/manage_income.png" alt="Manage Income" />
+            <h3>Manage Income</h3>
+            <p>Monitor your income and stay on top of your finances.</p>
+          </div>
+          <div class="feature-item">
+            <img src="/static/img/generate_report.png" alt="Generate Reports" />
+            <h3>Generate Reports</h3>
+            <p>Generate detailed reports to analyze your financial status.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="container">
+        <h2>About Me</h2>
+        <p>
+          Learn more about me and what I do by linking with me
+          <a href="https://www.linkedin.com/in/munjed-abazah/" target="blank"
+            >here</a
+          >
+          😉.
+        </p>
+        <img
+          class="svg-about"
+          alt="animated svg"
+          src="/static/10259340_4401278.svg"
+        />
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2>Contact Me</h2>
+        <p>
+          Have questions? Get in touch with
+          <a href="mailto:abazamunged@gmail.com">me</a>.
+        </p>
+        <img
+          class="svg-contact"
+          alt="animated svg"
+          src="/static/6170426_3054594.svg"
+        />
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 MyApp. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Smooth scroll to sections
+        document.querySelectorAll(".scroll").forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute("href")).scrollIntoView({
+              behavior: "smooth",
+            });
+          });
+        });
+      });
+
+      function toggleMenu() {
+        const navLinks = document.getElementById("nav-links");
+        navLinks.classList.toggle("show");
+      }
+    </script>
+  </body>
+</html>

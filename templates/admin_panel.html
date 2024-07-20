@@ -1,0 +1,95 @@
+{% extends "base.html" %} {% block title %}Admin Panel{% endblock %} {% block
+content %}
+
+<h1>Wellcome, admin</h1>
+<br />
+<div class="table-responsive">
+  <h2>Transactions</h2>
+  <table id="transactionsTable" class="table table-striped mt-4">
+    <thead class="table-head">
+      <tr>
+        <td>ID</td>
+        <th>User</th>
+        <th>Amount</th>
+        <th>Category</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Currency</th>
+        <th>Date</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      {% for transaction in transactions %}
+      <tr>
+        <td>{{transaction.id}}</td>
+        <td>{{transaction.user.username}}</td>
+        <td>{{transaction.amount|float}}</td>
+        <td>{{transaction.category.name}}</td>
+        <td>{{transaction.type}}</td>
+        <td>{{transaction.description}}</td>
+        <td>{{transaction.currency}}</td>
+        <td>{{transaction.date}}</td>
+        <td>{{transaction.created_at}}</td>
+        <td></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<br>
+<br>
+<div class="table-responsive">
+  <h2>Users</h2>
+  <table id="transactionsTable" class="table table-striped mt-4">
+    <thead class="table-head">
+      <tr>
+        <th>ID</td>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Super User</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      {% for user in users %}
+      <tr>
+        <td>{{user.id}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.is_superuser}}</td>
+        <td>{{user.created_at}}</td>
+        <td></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<br>
+<br>
+
+<div class="table-responsive">
+  <h2>Categories</h2>
+  <table id="transactionsTable" class="table table-striped mt-4">
+    <thead class="table-head">
+      <tr>
+        <th>ID</td>
+        <th>Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      {% for cat in categories %}
+      <tr>
+        <td>{{cat.id}}</td>
+        <td>{{cat.name}}</td>
+        <td></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

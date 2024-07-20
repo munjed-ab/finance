@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/base.css" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/static/css/fontawesome-free/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="offscreen d-grid">
+      <a
+        id="menubtn"
+        class="menubtn"
+        data-bs-toggle="offcanvas"
+        href="#offcanvasExample"
+        role="button"
+        aria-controls="offcanvasExample"
+      >
+        <i class="fa fa-circle" aria-hidden="true"></i>
+      </a>
+
+      <div
+        class="offcanvas offcanvas-start"
+        tabindex="-1"
+        id="offcanvasExample"
+        aria-labelledby="offcanvasExampleLabel"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+            Munjed Finance
+          </h5>
+          <button
+            type="button"
+            class="btn-close text-reset"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+              <a href="/" class="nav-link text-light" aria-current="page">
+                <i class="fas fa-fw fa-home"></i>
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="/dashboard" class="nav-link text-white">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a href="/transactions" class="nav-link text-white">
+                <i class="fa fa-credit-card" aria-hidden="true"></i>
+                Transactions
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-white"
+                data-bs-toggle="collapse"
+                href="#collapseReports"
+                role="button"
+                aria-expanded="false"
+                aria-controls="collapseReports"
+              >
+                <i class="fas fa-fw fa-table"></i>
+                Reports
+              </a>
+              <div class="collapse" id="collapseReports">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a
+                      href="/reports/transactions"
+                      class="nav-link text-white ms-4"
+                      >Transactions</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/reports/income-vs-expense"
+                      class="nav-link text-white ms-4"
+                      >Income vs Expense</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/reports/expense-by-category"
+                      class="nav-link text-white ms-4"
+                      >Expense by Category</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+          <div class="mt-auto">
+            <hr />
+            <div class="dropdown">
+              <a
+                href="#"
+                class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                id="dropdownUser1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i
+                  style="margin: 5px"
+                  class="fa fa-user-circle fa-2x"
+                  aria-hidden="true"
+                ></i>
+                <strong>{{ request.state.user.username }}</strong>
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-dark text-small shadow"
+                aria-labelledby="dropdownUser1"
+              >
+                <li><a class="dropdown-item" href="/profile">Profile</a></li>
+
+                <li><a class="dropdown-item" href="/settings">Settings</a></li>
+
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex vh-100">
+      <nav id="sidebar" class="bg-dark text-white d-flex flex-column p-3">
+        <h1 class="text-center">Munjed Finance</h1>
+        <hr />
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a href="/" class="nav-link text-light" aria-current="page">
+              <i class="fas fa-fw fa-home"></i>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="/dashboard" class="nav-link text-white">
+              <i class="fas fa-fw fa-tachometer-alt"></i>
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a href="/transactions" class="nav-link text-white">
+              <i class="fa fa-credit-card" aria-hidden="true"></i>
+              Transactions
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link text-white"
+              data-bs-toggle="collapse"
+              href="#collapseReports"
+              role="button"
+              aria-expanded="false"
+              aria-controls="collapseReports"
+            >
+              <i class="fas fa-fw fa-table"></i>
+              Reports
+            </a>
+            <div class="collapse" id="collapseReports">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li>
+                  <a
+                    href="/reports/transactions"
+                    class="nav-link text-white ms-4"
+                    >Transactions</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/reports/income-vs-expense"
+                    class="nav-link text-white ms-4"
+                    >Income vs Expense</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/reports/expense-by-category"
+                    class="nav-link text-white ms-4"
+                    >Expense by Category</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+        <div class="mt-auto">
+          <hr />
+          <div class="dropdown">
+            <a
+              href="#"
+              class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+              id="dropdownUser1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i
+                style="margin: 5px"
+                class="fa fa-user-circle fa-2x"
+                aria-hidden="true"
+              ></i>
+              <strong>{{ request.state.user.username }}</strong>
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-dark text-small shadow"
+              aria-labelledby="dropdownUser1"
+            >
+              <li><a class="dropdown-item" href="/profile">Profile</a></li>
+
+              <li><a class="dropdown-item" href="/settings">Settings</a></li>
+
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="flex-grow-1 p-4 main-content">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"
+      integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="/static/js/active_link.js"></script>
+  </body>
+</html>
