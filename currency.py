@@ -26,7 +26,7 @@ CURRENCIES = [
 "AOA",
 "ALL"
 ]
-API_URL = f'https://v6.exchangerate-api.com/v6/{os.environ['EXCHANGE_RATE_API_KEY']}/latest/'
+API_URL = f'https://v6.exchangerate-api.com/v6/{os.environ["EXCHANGE_RATE_API_KEY"]}/latest/'
 JSON_FILE = 'exchange_rates/exchange_rates_'
 
 
