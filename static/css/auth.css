@@ -120,7 +120,7 @@ input {
   border: 1px solid var(--gray);
   border-radius: 4px;
   font-size: 1rem;
-  color: var(--text-color-primary);
+  color: black !important;
   background-color: var(--background-color-main);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -129,6 +129,7 @@ input:focus {
   border-color: var(--primary);
   outline: none;
   box-shadow: 0 0 5px rgba(17, 121, 83, 0.5);
+  color: black;
 }
 
 .info {

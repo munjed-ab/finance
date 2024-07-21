@@ -139,30 +139,34 @@
     </div>
     <div class="d-flex vh-100">
       <nav id="sidebar" class="bg-dark text-white d-flex flex-column p-3">
-        <h1 class="text-center">Financy</h1>
+        <h1 class="sidebar-main-text text-center">Financy</h1>
         <hr />
         <ul class="nav nav-pills flex-column mb-auto">
           <li class="nav-item">
-            <a href="/" class="nav-link text-light" aria-current="page">
+            <a
+              href="/"
+              class="sidebar-text nav-link text-light"
+              aria-current="page"
+            >
               <i class="fas fa-fw fa-home"></i>
               Home
             </a>
           </li>
           <li>
-            <a href="/dashboard" class="nav-link text-white">
+            <a href="/dashboard" class="sidebar-text nav-link text-white">
               <i class="fas fa-fw fa-tachometer-alt"></i>
               Dashboard
             </a>
           </li>
           <li>
-            <a href="/transactions" class="nav-link text-white">
+            <a href="/transactions" class="sidebar-text nav-link text-white">
               <i class="fa fa-credit-card" aria-hidden="true"></i>
               Transactions
             </a>
           </li>
           <li class="nav-item">
             <a
-              class="nav-link text-white"
+              class="sidebar-text nav-link text-white"
               data-bs-toggle="collapse"
               href="#collapseReports"
               role="button"
@@ -177,21 +181,21 @@
                 <li>
                   <a
                     href="/reports/transactions"
-                    class="nav-link text-white ms-4"
+                    class="sidebar-text nav-link text-white ms-4"
                     >Transactions</a
                   >
                 </li>
                 <li>
                   <a
                     href="/reports/income-vs-expense"
-                    class="nav-link text-white ms-4"
+                    class="sidebar-text nav-link text-white ms-4"
                     >Income vs Expense</a
                   >
                 </li>
                 <li>
                   <a
                     href="/reports/expense-by-category"
-                    class="nav-link text-white ms-4"
+                    class="sidebar-text nav-link text-white ms-4"
                     >Expense by Category</a
                   >
                 </li>
@@ -214,7 +218,9 @@
                 class="fa fa-user-circle fa-2x"
                 aria-hidden="true"
               ></i>
-              <strong>{{ request.state.user.username }}</strong>
+              <strong class="sidebar-text"
+                >{{ request.state.user.username }}</strong
+              >
             </a>
             <ul
               class="dropdown-menu dropdown-menu-dark text-small shadow"
