@@ -109,10 +109,12 @@ register_tortoise(
 @app.on_event("startup")
 async def startup():
     await database.init()
+
     # Fetch initial exchange rates
     # await fetch_exchange_rates()
+
     # Start background task for periodic updates
-    # asyncio.create_task(update_exchange_rates_periodically())
+    # asyncio.create_task(update_exchange_rates_periodically()) #will uncomment when exchange rate subscription refill
 
 async def update_exchange_rates_periodically():
     while True:
