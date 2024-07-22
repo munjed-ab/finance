@@ -11,6 +11,8 @@ Key features of the application include:
 - User authentication and authorization.
 - Project and category management.
 - CRUD operations for transactions, allowing users to create, read, update, and delete their financial records.
+- Generating reports.
+- Convert between different currencies (using Exchange Rate API).
 - Nice Graphs for visualizing the transactions.
 - Swagger UI documentation for easy API testing and exploration.
 
@@ -42,8 +44,9 @@ Technologies used in this project:
     ```bash
     pip install -r requirements.txt
     ```
+4. Create a .env file and place the needed secrets (DP_NAME, DP_PASS, SEKRET_KEY..).
 
-4. Set up the database:
+5. Set up the database:
 
     ```bash
     aerich init -t config_orm.TORTOISE_ORM
@@ -52,7 +55,7 @@ Technologies used in this project:
     aerich upgrade
     ```
 
-5. Run the application:
+6. Run the application:
 
     ```bash
     uvicorn main:app --reload
@@ -70,4 +73,5 @@ Technologies used in this project:
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License.  
+All the artwork provided are form [Freepik](https://www.freepik.com/)
