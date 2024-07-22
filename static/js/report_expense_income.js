@@ -11,15 +11,17 @@ options.forEach(function (option) {
 
 document.addEventListener("DOMContentLoaded", function () {
   fetchData();
+  var project_name = $("#project-filter option:selected").text();
   var cur = $("#cur-filter").val();
   function fetchData() {
     var month = $("#month-filter").val();
     var year = $("#year-filter").val();
+    var project_id = $("#project-filter").val();
     cur = $("#cur-filter").val();
     $.ajax({
       url: `/reports/expense-vs-income/data`,
       method: "GET",
-      data: { month: month, year: year, cur: cur },
+      data: { month: month, year: year, cur: cur, project_id: project_id },
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -170,7 +172,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const options = { year: "numeric", month: "short", day: "numeric" };
     return date.toLocaleDateString("en-US", options);
   }
-  $("#month-filter, #year-filter, #cur-filter").change(fetchData);
+  $("#month-filter, #year-filter, #cur-filter, #project-filter").change(
+    fetchData
+  );
 
   document
     .getElementById("downloadExcelBtn")
@@ -179,6 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
       var wb = XLSX.utils.table_to_book(
         document.getElementById("transactionsTable")
       );
+      project_name = $("#project-filter option:selected").text();
 
       // Process Data (add a new row)
       var ws = wb.Sheets["Sheet1"];
@@ -208,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       XLSX.writeFile(
         wb,
-        `expense_vs_income_report_in_${year}_${month}_in_${cur}.xlsb`
+        `expense_vs_income_report_in_${year}_${month}_in_${cur}_for_${project_name}.xlsb`
       );
     });
 });

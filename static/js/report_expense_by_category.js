@@ -11,15 +11,17 @@ options.forEach(function (option) {
 
 document.addEventListener("DOMContentLoaded", function () {
   fetchCategoryExpenses();
+  var project_name = $("#project-filter option:selected").text();
   var cur = $("#cur-filter").val();
   function fetchCategoryExpenses() {
     var month = $("#month-filter").val();
     var year = $("#year-filter").val();
+    var project_id = $("#project-filter").val();
     cur = $("#cur-filter").val();
     $.ajax({
       url: `/reports/expense-by-category/data`,
       method: "GET",
-      data: { month: month, year: year, cur: cur },
+      data: { month: month, year: year, cur: cur, project_id: project_id },
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -47,7 +49,9 @@ document.addEventListener("DOMContentLoaded", function () {
       tableBody.appendChild(row);
     });
   }
-  $("#month-filter, #year-filter, #cur-filter").change(fetchCategoryExpenses);
+  $("#month-filter, #year-filter, #cur-filter, #project-filter").change(
+    fetchCategoryExpenses
+  );
   document
     .getElementById("downloadExcelBtn")
     .addEventListener("click", function () {
@@ -55,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
       var wb = XLSX.utils.table_to_book(
         document.getElementById("transactionsTable")
       );
-
+      project_name = $("#project-filter option:selected").text();
       // Process Data (add a new row)
       var ws = wb.Sheets["Sheet1"];
       XLSX.utils.sheet_add_aoa(ws, [["Created " + new Date().toISOString()]], {
@@ -84,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       XLSX.writeFile(
         wb,
-        `expense_by_category_report_in_${year}_${month}_in_${cur}.xlsb`
+        `expense_by_category_report_in_${year}_${month}_in_${cur}_for_${project_name}.xlsb`
       );
     });
 });

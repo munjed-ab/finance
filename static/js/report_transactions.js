@@ -11,14 +11,15 @@ options.forEach(function (option) {
 
 document.addEventListener("DOMContentLoaded", function () {
   fetchTransactions();
+  var project_name = $("#project-filter option:selected").text();
   function fetchTransactions() {
     var month = $("#month-filter").val();
     var year = $("#year-filter").val();
-
+    var project_id = $("#project-filter").val();
     $.ajax({
       url: `/reports/transactions/data`,
       method: "GET",
-      data: { month: month, year: year },
+      data: { month: month, year: year, project_id: project_id },
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -41,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
                       parseFloat(tran.amount).toFixed(2)
                     )} ${tran.currency}</td>
                     <td>${tran.type}</td>
+                    <td>${tran.project.name}</td>
                     <td>${tran.category.name}</td>
                     <td>${tran.description}</td>
                     <td>${tran.date}</td>
@@ -49,7 +51,9 @@ document.addEventListener("DOMContentLoaded", function () {
       tableBody.appendChild(row);
     });
   }
-  $("#month-filter, #year-filter, #cur-filter").change(fetchTransactions);
+  $("#month-filter, #year-filter, #cur-filter, #project-filter").change(
+    fetchTransactions
+  );
 
   document
     .getElementById("downloadExcelBtn")
@@ -58,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
       var wb = XLSX.utils.table_to_book(
         document.getElementById("transactionsTable")
       );
-
+      project_name = $("#project-filter option:selected").text();
       // Process Data (add a new row)
       var ws = wb.Sheets["Sheet1"];
       XLSX.utils.sheet_add_aoa(ws, [["Created " + new Date().toISOString()]], {
@@ -83,6 +87,9 @@ document.addEventListener("DOMContentLoaded", function () {
         month = "_";
       }
 
-      XLSX.writeFile(wb, `transactions_report_in_${year}_${month}.xlsb`);
+      XLSX.writeFile(
+        wb,
+        `transactions_report_in_${year}_${month}_for_${project_name}.xlsb`
+      );
     });
 });

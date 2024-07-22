@@ -172,13 +172,13 @@ tr {
 
 @media (max-width: 1900px) {
   #sidebar {
-    width: 300px; /* Adjust sidebar width for medium screens */
+    width: 350px; /* Adjust sidebar width for medium screens */
   }
   .sidebar-text {
     margin-right: 20px;
   }
   .main-content {
-    margin-left: 300px; /* Adjust margin for medium screens */
+    margin-left: 350px; /* Adjust margin for medium screens */
   }
   .menubtn {
     visibility: hidden;

@@ -59,20 +59,44 @@ class Category(CategoryBase):
         from_attributes = True
         use_enum_values = True
 
+
+class ProjectBase(BaseModel):
+    name: str
+
+class ProjectCreate(ProjectBase):
+    pass
+
+class ProjectUpdate(ProjectBase):
+    pass
+
+class Project(ProjectBase):
+    id: int
+    user_id: int
+    created_at: datetime
+    updated_at: datetime
+    class Config:
+        from_attributes = True
+        use_enum_values = True
+
+
 class TransactionBase(BaseModel):
     amount: float
     type: str
+    project: Optional[Project] = None
     category: Optional[Category] = None
     currency: str
     description: Optional[str] = None
     date: date
-    
+
 
 class TransactionCreate(TransactionBase):
+    project_name: str
     category_name: str
 
 class TransactionUpdate(TransactionBase):
+    project_name: Optional[str] = None
     category_name: Optional[str] = None
+
 
 class Transaction(TransactionBase):
     id: int

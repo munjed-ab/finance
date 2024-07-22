@@ -64,6 +64,15 @@
         <option value="ZAR">ZAR</option>
       </select>
     </div>
+    <div class="col-md-3 wrapper-filter">
+      <label for="project-filter">Project:</label>
+      <select id="project-filter" class="form-control">
+        <option value="all">All</option>
+        {% for project in projects %}
+        <option value="{{ project.id }}">{{ project.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
   </div>
 </div>
 <h2 class="float-right">

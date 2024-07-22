@@ -48,6 +48,7 @@ $(document).ready(function () {
     var month = $("#month-filter").val();
     var year = $("#year-filter").val();
     cur = $("#cur-filter").val();
+    var project_id = $("#project-filter").val();
     var token = localStorage.getItem("token");
 
     $.ajax({
@@ -57,6 +58,7 @@ $(document).ready(function () {
         year: year,
         cur: cur,
         month: month,
+        project_id: project_id,
       },
       headers: {
         Authorization: `Bearer ${token}`,
@@ -78,9 +80,11 @@ $(document).ready(function () {
     });
   }
 
-  $("#month-filter, #year-filter, #cur-filter").change(function () {
-    handleFilterChange();
-  });
+  $("#month-filter, #year-filter, #cur-filter, #project-filter").change(
+    function () {
+      handleFilterChange();
+    }
+  );
 
   // Initial load
   handleFilterChange();

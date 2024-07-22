@@ -257,7 +257,9 @@ async def get_transactions_page(request: Request):
 
 @app.get("/dashboard", response_class=HTMLResponse)
 async def dashboard(request: Request):
-    return templates.TemplateResponse("dashboard.html", {"request": request})
+    user = request.state.user
+    projects = await models.Project.filter(user=user)
+    return templates.TemplateResponse("dashboard.html", {"request": request, "projects":projects})
 
 
 @app.get("/dashboard/data", response_model=Overview)
@@ -265,9 +267,10 @@ async def get_dashboard_data(
     month: Optional[str] = Query(None, description="Month (e.g., '7' for July, 'all' for all months)"),
     year: str = Query(..., description="Year (e.g., '2024')"),
     cur: str = Query(..., description="Currency (e.g., 'USD')"),
+    project_id: str = Query(..., description="Project ID (e.g., '3'.. or 'all' for all projects)"),
     current_user: UserSchema = Depends(get_current_active_user)):
 
-    overview_data = await get_filtered_transactions(current_user, str(month), str(year), cur)
+    overview_data = await get_filtered_transactions(current_user, str(month), str(year), cur, str(project_id))
     return Overview(**overview_data)
 
 
@@ -276,9 +279,10 @@ async def get_report_expense_vs_income(
     month: Optional[str] = Query(None, description="Month (e.g., '7' for July, 'all' for all months)"),
     year: str = Query(..., description="Year (e.g., '2024')"),
     cur: str = Query(..., description="Currency (e.g., 'USD')"),
+    project_id: str = Query(..., description="Project ID (e.g., '3'.. or 'all' for all projects)"),
     current_user: UserSchema = Depends(get_current_active_user)):
 
-    overview_data = await get_report_expense_vs_income_crud(current_user, str(month), str(year), str(cur))
+    overview_data = await get_report_expense_vs_income_crud(current_user, str(month), str(year), str(cur), str(project_id))
     return ReportExVSIn(**overview_data)
 
 
@@ -287,9 +291,10 @@ async def get_report_expense_by_category(
     month: Optional[str] = Query(None, description="Month (e.g., '7' for July, 'all' for all months)"),
     year: str = Query(..., description="Year (e.g., '2024')"),
     cur: str = Query(..., description="Currency (e.g., 'USD')"),
+    project_id: str = Query(..., description="Project ID (e.g., 3.. or 'all' for all projects)"),
     current_user: UserSchema = Depends(get_current_active_user)):
 
-    overview_data = await get_report_expense_by_category_crud(current_user, str(month), str(year), str(cur))
+    overview_data = await get_report_expense_by_category_crud(current_user, str(month), str(year), str(cur), str(project_id))
     return ReportExbyCat(**overview_data)
 
 
@@ -297,24 +302,31 @@ async def get_report_expense_by_category(
 async def get_report_transactions(
     month: Optional[str] = Query(None, description="Month (e.g., '7' for July, 'all' for all months)"),
     year: str = Query(..., description="Year (e.g., '2024')"),
+    project_id: str = Query(..., description="Project ID (e.g., 3.. or 'all' for all projects)"),
     current_user: UserSchema = Depends(get_current_active_user)):
 
-    overview_data = await get_report_transactions_crud(current_user, str(month), str(year))
+    overview_data = await get_report_transactions_crud(current_user, str(month), str(year), str(project_id))
     return TransactionReport(**overview_data)
 
 
 @app.get("/reports/transactions", response_class=HTMLResponse)
 async def get_transaction_report_page(request: Request):
-    return templates.TemplateResponse("report_transactions.html", {"request": request})
+    user = request.state.user
+    projects = await models.Project.filter(user=user)
+    return templates.TemplateResponse("report_transactions.html", {"request": request, "projects":projects})
 
 @app.get("/reports/income-vs-expense", response_class=HTMLResponse)
 async def get_invsex_page(request: Request):
-    return templates.TemplateResponse("report_income_expense.html", {"request": request})
+    user = request.state.user
+    projects = await models.Project.filter(user=user)
+    return templates.TemplateResponse("report_income_expense.html", {"request": request, "projects":projects})
 
 
 @app.get("/reports/expense-by-category", response_class=HTMLResponse)
 async def get_exbycat_page(request: Request):
-    return templates.TemplateResponse("report_expense_by_category.html", {"request": request})
+    user = request.state.user
+    projects = await models.Project.filter(user=user)
+    return templates.TemplateResponse("report_expense_by_category.html", {"request": request, "projects":projects})
 
 
 @app.get("/settings", response_class=HTMLResponse)

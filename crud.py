@@ -1,5 +1,5 @@
 from passlib.context import CryptContext
-from models import User, Transaction, Category
+from models import User, Transaction, Category, Project
 from schemas import (
     TransactionCreate,
     TransactionUpdate,
@@ -31,24 +31,26 @@ async def update_user(user: User, user_update: UserUpdate) -> User:
 #     return category
 
 async def create_transaction(user: User, transaction: TransactionCreate) -> TransactionSchema:
-    category, created = await Category.get_or_create(name=str(transaction.category_name).lower().strip())
-
-    transaction_data = transaction.dict(exclude={"category", "category_name"})
-    transaction_obj = await Transaction.create(user=user, category=category, **transaction_data)
+    category, cat_created = await Category.get_or_create(name=str(transaction.category_name).lower().strip())
+    project, pro_created = await Project.get_or_create(name=str(transaction.project_name).lower().strip(), user=user)
+    transaction_data = transaction.model_dump(exclude={"category", "category_name", "project", "project_name"})
+    transaction_obj = await Transaction.create(user=user, category=category, project=project, **transaction_data)
     
     return transaction_obj
 
 async def get_transactions(user: User) -> List[TransactionSchema]:
-    transactions = await Transaction.filter(user=user).prefetch_related('category')
+    transactions = await Transaction.filter(user=user).prefetch_related('category', 'project')
     return transactions
 
 async def update_transaction(user: User, transaction_id: int, transaction: TransactionUpdate) -> TransactionSchema:
     transaction_obj = await Transaction.get(id=transaction_id, user=user)
     if transaction_obj:
-        category, created = await Category.get_or_create(name=str(transaction.category_name).lower().strip())
-        transaction_obj.update_from_dict(transaction.model_dump(exclude={'category_name'}))
+        category, cat_created = await Category.get_or_create(name=str(transaction.category_name).lower().strip())
+        project, pro_created = await Project.get_or_create(name=str(transaction.project_name).lower().strip(), user=user)
+        transaction_obj.update_from_dict(transaction.model_dump(exclude={'category_name', 'project_name'}))
         transaction_obj.category = category
-        
+        transaction_obj.project = project
+
         await transaction_obj.save()
         return transaction_obj
     return None
@@ -61,8 +63,13 @@ async def delete_transaction(user: User, transaction_id: int):
     return False
 
 
-async def get_filtered_transactions(user: User, month: Optional[str], year: str, cur: str) -> dict:
-    query = Transaction.filter(user=user).prefetch_related('category')
+async def get_filtered_transactions(user: User, month: Optional[str], year: str, cur: str, project_id: str) -> dict:
+    query = None
+    if project_id == "all":
+        query = Transaction.filter(user=user).prefetch_related('category', 'project')
+    else:
+        query = Transaction.filter(user=user, project=int(project_id)).prefetch_related('category', 'project')
+    
     
     start_date, end_date = get_start_end_date(month, year)
 
@@ -115,8 +122,13 @@ def get_start_end_date(month: str, year: str) -> tuple[date, date]:
     return start_date, end_date
 
 
-async def get_report_expense_vs_income(user: User, month: Optional[str], year: str, cur: str) -> dict:
-    query = Transaction.filter(user=user).prefetch_related('category')
+async def get_report_expense_vs_income(user: User, month: Optional[str], year: str, cur: str, project_id: str) -> dict:
+    query = None
+    if project_id == "all":
+        query = Transaction.filter(user=user).prefetch_related('category', 'project')
+    else:
+        query = Transaction.filter(user=user, project=int(project_id)).prefetch_related('category', 'project')
+    
     
     start_date, end_date = get_start_end_date(month, year)
 
@@ -134,15 +146,18 @@ async def get_report_expense_vs_income(user: User, month: Optional[str], year: s
         'transactions' : transactions
     }
 
-async def get_report_expense_by_category(user: User, month: Optional[str], year: str, cur: str) -> dict:
-    query = Transaction.filter(user=user).prefetch_related('category')
+async def get_report_expense_by_category(user: User, month: Optional[str], year: str, cur: str, project_id: str) -> dict:
+    query = None
+    if project_id == "all":
+        query = Transaction.filter(user=user).prefetch_related('category')
+    else:
+        query = Transaction.filter(user=user, project=int(project_id)).prefetch_related('category')
     
     start_date, end_date = get_start_end_date(month, year)
 
     transactions = await query.all()
     
     transactions = [transaction for transaction in transactions if start_date <= transaction.date <= end_date]
-
     expense_by_category = defaultdict(Decimal)
 
 
@@ -151,13 +166,18 @@ async def get_report_expense_by_category(user: User, month: Optional[str], year:
         if transaction.type == 'Expense':
             expense_by_category[transaction.category.name] += transaction.amount
 
+
     return {
         'expense_by_category': dict(expense_by_category),
     }
 
 
-async def get_report_transactions(user: User, month: Optional[str], year: str) -> dict:
-    query = Transaction.filter(user=user).prefetch_related('category')
+async def get_report_transactions(user: User, month: Optional[str], year: str, project_id: str) -> dict:
+    query = None
+    if project_id == "all":
+        query = Transaction.filter(user=user).prefetch_related('category', 'project')
+    else:
+        query = Transaction.filter(user=user, project=int(project_id)).prefetch_related('category', 'project')
     
     start_date, end_date = get_start_end_date(month, year)
 

@@ -26,11 +26,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const row = transactionsTable.insertRow();
         row.insertCell(0).textContent = transaction.amount;
         row.insertCell(1).textContent = transaction.type;
-        row.insertCell(2).textContent = transaction.category.name;
-        row.insertCell(3).textContent = transaction.currency;
-        row.insertCell(4).textContent = transaction.description;
-        row.insertCell(5).textContent = transaction.date;
-        const actionsCell = row.insertCell(6);
+        row.insertCell(2).textContent = transaction.project.name;
+        row.insertCell(3).textContent = transaction.category.name;
+        row.insertCell(4).textContent = transaction.currency;
+        row.insertCell(5).textContent = transaction.description;
+        row.insertCell(6).textContent = transaction.date;
+        const actionsCell = row.insertCell(7);
         actionsCell.innerHTML = `
                     <button style="border-radius:10px" class="btn btn-primary" onclick="editTransaction(${transaction.id})">Edit</button>
                     <button style="border-radius:10px" class="btn btn-danger" onclick="deleteTransaction(${transaction.id})">Delete</button>
@@ -49,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const data = {
       amount: parseFloat(formData.get("amount")),
       type: formData.get("type"),
+      project_name: formData.get("project_name"),
       category_name: formData.get("category_name"),
       currency: formData.get("currency"),
       description: formData.get("description"),
@@ -84,10 +86,11 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("edit-transaction-id").value = id;
     document.getElementById("edit-amount").value = cells[0].textContent;
     document.getElementById("edit-type").value = cells[1].textContent;
-    document.getElementById("edit-category").value = cells[2].textContent;
-    document.getElementById("edit-currency").value = cells[3].textContent;
-    document.getElementById("edit-description").value = cells[4].textContent;
-    document.getElementById("edit-date").value = cells[5].textContent;
+    document.getElementById("edit-project").value = cells[2].textContent;
+    document.getElementById("edit-category").value = cells[3].textContent;
+    document.getElementById("edit-currency").value = cells[4].textContent;
+    document.getElementById("edit-description").value = cells[5].textContent;
+    document.getElementById("edit-date").value = cells[6].textContent;
 
     editTransactionModal.show();
   };
@@ -101,6 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const data = {
       amount: parseFloat(formData.get("amount")),
       type: formData.get("type"),
+      project_name: formData.get("project_name"),
       category_name: formData.get("category_name"),
       currency: formData.get("currency"),
       description: formData.get("description"),
