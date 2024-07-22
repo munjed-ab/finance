@@ -170,6 +170,25 @@ tr {
   z-index: 1000010 !important;
 }
 
+@media (max-width: 1900px) {
+  #sidebar {
+    width: 300px; /* Adjust sidebar width for medium screens */
+  }
+  .sidebar-text {
+    margin-right: 20px;
+  }
+  .main-content {
+    margin-left: 300px; /* Adjust margin for medium screens */
+  }
+  .menubtn {
+    visibility: hidden;
+    display: none;
+  }
+  .offscreen {
+    display: none;
+  }
+}
+
 @media (max-width: 1500px) {
   #sidebar {
     width: 280px; /* Adjust sidebar width for medium screens */

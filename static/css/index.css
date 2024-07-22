@@ -235,7 +235,7 @@ nav .menu-icon {
   cursor: pointer;
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 1700px) {
   nav .menu-icon {
     display: none !important;
   }
