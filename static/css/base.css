@@ -33,6 +33,11 @@
     "Liberation Mono", "Courier New", monospace;
 }
 
+::selection {
+  color: #ffffff;
+  background: var(--primary);
+}
+
 body {
   margin: 0;
   font-family: "Lucida Console", "Courier New" !important;

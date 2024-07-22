@@ -35,6 +35,11 @@ body {
   overflow-x: hidden;
 }
 
+::selection {
+  color: #ffffff;
+  background: var(--primary);
+}
+
 header {
   background-color: var(--primary);
   padding: 1rem 0;
