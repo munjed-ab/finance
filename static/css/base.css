@@ -53,6 +53,18 @@ input {
   height: 100vh;
 }
 
+.nancy {
+  display: inline;
+  color: var(--primary);
+}
+
+.fi {
+  display: inline;
+  font-size: 50px;
+  padding: 2px;
+  color: var(--light);
+}
+
 #sidebar {
   width: 280px;
   position: fixed;
@@ -216,6 +228,9 @@ tr {
     font-size: small;
     margin-right: 10px;
     margin-left: 0;
+  }
+  .nancy {
+    font-size: 40px;
   }
   .sidebar-main-text {
     font-size: large;
