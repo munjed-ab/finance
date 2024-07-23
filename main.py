@@ -253,7 +253,9 @@ async def delete_transaction(transaction_id: int, current_user: UserSchema = Dep
 
 @app.get("/transactions", response_class=HTMLResponse)
 async def get_transactions_page(request: Request):
-    return templates.TemplateResponse("transactions.html", {"request": request})
+    user = request.state.user
+    projects = await models.Project.filter(user=user)
+    return templates.TemplateResponse("transactions.html", {"request": request, "projects":projects})
 
 @app.get("/dashboard", response_class=HTMLResponse)
 async def dashboard(request: Request):

@@ -37,8 +37,14 @@ content %}
             id="project_name"
             name="project_name"
             placeholder="Home"
+            list="projects"
             required
           />
+          <datalist id="projects">
+            {% for project in projects %}
+            <option value="{{ project.name }}">{{ project.name }}</option>
+            {% endfor %}
+          </datalist>
         </div>
         <div class="mb-3">
           <label for="category_name" class="form-label">Category</label>
