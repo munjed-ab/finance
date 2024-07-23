@@ -52,6 +52,11 @@ body {
   color: var(--light);
 }
 
+::selection {
+  color: var(--dark);
+  background: var(--primary);
+}
+
 /* Centering Container */
 .container-wrapper {
   display: flex;

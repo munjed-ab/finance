@@ -34,7 +34,7 @@
 }
 
 ::selection {
-  color: #ffffff;
+  color: var(--dark);
   background: var(--primary);
 }
 
